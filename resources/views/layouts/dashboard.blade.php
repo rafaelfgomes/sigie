@@ -10,7 +10,7 @@
 
     <body>
 
-        <div id="dashboard">
+        <div id="app">
 
             <header>
 
