@@ -13,13 +13,13 @@ class CoursesTableSeeder extends Seeder
     public function run()
     {
         
-        $data[] = [ 'name' => 'Ténico de Enfermagem', 'status' => 1 ];
-        $data[] = [ 'name' => 'Ténico de Informática', 'status' => 1 ];
-        $data[] = [ 'name' => 'Administração', 'status' => 1 ];
-        $data[] = [ 'name' => 'Desenho Técnico', 'status' => 1 ];
-        $data[] = [ 'name' => 'Mecatrônica', 'status' => 1 ];
-        $data[] = [ 'name' => 'Redes de Computador', 'status' => 1 ];
-        $data[] = [ 'name' => 'Pedagogia', 'status' => 1 ];
+        $data[] = [ 'name' => 'Ténico de Enfermagem', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Ténico de Informática', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Administração', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Desenho Técnico', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Mecatrônica', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Redes de Computador', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
+        $data[] = [ 'name' => 'Pedagogia', 'status' => 1, 'created_at' => now(), 'updated_at' => now() ];
 
         Course::insert($data);
 

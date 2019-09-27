@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -11,6 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        
         $data = [
             'name' => 'Administrador do Sistema',
             'email' => 'admin@sigie.com.br',
@@ -18,5 +20,6 @@ class UsersTableSeeder extends Seeder
         ];
 
         User::create($data);
+
     }
 }

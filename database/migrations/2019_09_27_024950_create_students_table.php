@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('email', 50)->unique();
             $table->char('status', 1);
             $table->integer('contact_id')->unsigned()->nullable();
-            $table->integer('address_id'->unsigned())->nullable();
+            $table->integer('address_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
