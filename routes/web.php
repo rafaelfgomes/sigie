@@ -16,6 +16,15 @@ Route::get('/', 'Auth\LoginController@showLoginForm')->name('index');
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/institutions', 'InstitutionController@index')->name('institutions');
+
+Route::group(['prefix' => 'institutions'], function () {
+
+    Route::get('/', 'InstitutionController@index')->name('institutions');
+    Route::post('/', 'InstitutionController@store')->name('institutions.save');
+    
+});
+
+
+
 Route::get('/courses', 'CourseController@index')->name('courses');
 Route::get('/students', 'StudentController@index')->name('students');

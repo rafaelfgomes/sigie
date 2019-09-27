@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+
+    public function index()
+    {
+
+        $students = Student::paginate(10);
+
+        return view('students')->with('students', $students);
+    
+    }
 
     public function store(Request $request)
     {
@@ -14,7 +24,9 @@ class StudentController extends Controller
 
     public function show($id)
     {
-        # code...
+        $student = Student::find($id);
+
+        return response()->json([ 'student'=> $student ]);
     }
 
     public function edit()

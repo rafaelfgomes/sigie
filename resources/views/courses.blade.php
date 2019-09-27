@@ -17,18 +17,18 @@
     
     <tbody>
 
-      @foreach ($institutions as $institution)
+      @foreach ($courses as $course)
 
         <tr class="text-center">
 
-          <th scope="row">{{ $institution->id }}</th>
-          <td>{{ $institution->name }}</td>
-          <td>{{ $institution->cnpj }}</td>
+          <th scope="row">{{ $course->id }}</th>
+          <td>{{ $course->name }}</td>
+          <td>{{ $course->status }}</td>
           <td>
   
-            <button type="button" class="btn btn-info">I</button>
-            <button type="button" class="btn btn-secondary">A</button>
-            <button type="button" class="btn btn-danger">E</button>
+              <button type="button" class="btn btn-info" style="width: 40px;"><i class="far fa-eye"></i></button>
+              <button type="button" class="btn btn-secondary" style="width: 40px;"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger" style="width: 40px;"><i class="fas fa-trash"></i></button>
   
           </td>
   
@@ -39,5 +39,14 @@
     </tbody>
 
   </table>
+
+  <p>&nbsp;</p>
+
+  <div class="d-flex justify-content-center">
+
+    {{ $courses->links() }}
+
+  </div>
+
     
 @endsection

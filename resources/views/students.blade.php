@@ -9,7 +9,7 @@
       <tr class="text-center">
         <th scope="col">#</th>
         <th scope="col">Nome</th>
-        <th scope="col">CNPJ</th>
+        <th scope="col">CPF</th>
         <th scope="col">Status</th>
         <th scope="col">Ações</th>
       </tr>
@@ -18,14 +18,14 @@
     
     <tbody>
 
-      @foreach ($institutions as $institution)
+      @foreach ($students as $student)
 
         <tr class="text-center">
 
-          <th scope="row">{{ $institution->id }}</th>
-          <td>{{ $institution->name }}</td>
-          <td>{{ $institution->cnpj }}</td>
-          <td>{{ $institution->status }}</td>
+          <th scope="row">{{ $student->id }}</th>
+          <td>{{ $student->name }}</td>
+          <td>{{ $student->cpf }}</td>
+          <td>{{ $student->status }}</td>
           <td>
   
             <button type="button" class="btn btn-info" style="width: 40px;"><i class="far fa-eye"></i></button>
@@ -46,7 +46,7 @@
 
   <div class="d-flex justify-content-center">
 
-    {{ $institutions->links() }}
+    {{ $students->links() }}
 
   </div>
     
