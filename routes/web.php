@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/institutions', 'InstitutionController@index')->name('institutions');
+Route::get('/courses', 'CourseController@index')->name('courses');
+Route::get('/students', 'StudentController@index')->name('students');
