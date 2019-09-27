@@ -17,25 +17,36 @@ class InstitutionController extends Controller
 
     public function store(Request $request)
     {
+
+        $status = 0;
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:80',
             'cnpj' => 'required|string|max:14',
             'status' => 'required|boolean',
         ]);
 
+        if ($request->status) {
+            $status = 1;
+        }
+
         if ($validatedData) {
 
-            Institution::create($validatedData);
+            Institution::create($request->all());
         
         }
 
-        return redirect()->back();
+        return redirect()->to(route('index'));
 
     }
 
     public function show($id)
     {
-        # code...
+
+        $institution = Institution::find($id);
+
+        return response()->json([ 'institution' => $institution ]);
+
     }
 
     public function edit()

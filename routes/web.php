@@ -21,10 +21,22 @@ Route::group(['prefix' => 'institutions'], function () {
 
     Route::get('/', 'InstitutionController@index')->name('institutions');
     Route::post('/', 'InstitutionController@store')->name('institutions.save');
-    
+    Route::post('{id}', 'InstitutionController@show')->name('institutions.show');
+
 });
 
+Route::group(['prefix' => 'courses'], function () {
+    
+    Route::get('/', 'CourseController@index')->name('institutions');
+    Route::post('/', 'CourseController@store')->name('institutions.save');
+    Route::post('{id}', 'CourseController@show')->name('institutions.show');
 
+});
 
-Route::get('/courses', 'CourseController@index')->name('courses');
-Route::get('/students', 'StudentController@index')->name('students');
+Route::group(['prefix' => 'students'], function () {
+    
+    Route::get('/', 'StudentController@index')->name('institutions');
+    Route::post('/', 'StudentController@store')->name('institutions.save');
+    Route::post('{id}', 'StudentController@show')->name('institutions.show');
+
+});
