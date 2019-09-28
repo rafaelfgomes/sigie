@@ -30,19 +30,19 @@ Route::group(['prefix' => 'institutions'], function () {
 Route::group(['prefix' => 'courses'], function () {
     
     Route::get('/', 'CourseController@index')->name('courses');
-    Route::post('/', 'CourseController@store')->name('courses.save');
-    Route::get('info/{id}', 'CourseController@getInfo')->name('courses.data');
-    Route::post('update/{id}', 'CourseController@update')->name('courses.update');
-    Route::get('toggle/{id}', 'CourseController@toggleStatus')->name('courses.status');
+    Route::post('/', 'CourseController@store')->name('course.save');
+    Route::get('info/{id}', 'CourseController@getInfo')->name('course.data');
+    Route::post('update/{id}', 'CourseController@update')->name('course.update');
+    Route::get('toggle/{id}', 'CourseController@toggleStatus')->name('course.status');
 
 });
 
 Route::group(['prefix' => 'students'], function () {
     
     Route::get('/', 'StudentController@index')->name('students');
-    Route::post('/', 'StudentController@store')->name('students.save');
-    Route::get('info/{id}', 'StudentController@getInfo')->name('students.data');
-    Route::post('update/{id}', 'StudentController@update')->name('students.update');
-    Route::get('toggle/{id}', 'StudentController@delete')->name('students.status');
+    Route::post('/', 'StudentController@store')->name('student.save');
+    Route::get('info/{id}', 'StudentController@getInfo')->name('student.data');
+    Route::post('update/{id}', 'StudentController@update')->name('student.update');
+    Route::get('toggle/{id}', 'StudentController@toggleStatus')->name('student.status');
 
 });

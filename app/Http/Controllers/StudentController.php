@@ -16,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $students = Student::paginate(10);
+        $students = Student::orderBy('name')->paginate(10);
 
         return view('students')->with('students', $students);
     
@@ -27,16 +27,11 @@ class StudentController extends Controller
         # code...
     }
 
-    public function show($id)
+    public function getInfo($id)
     {
         $student = Student::find($id);
 
         return response()->json([ 'student'=> $student ]);
-    }
-
-    public function edit()
-    {
-        # code...
     }
 
     public function update(Request $request)
@@ -44,9 +39,15 @@ class StudentController extends Controller
         # code...
     }
 
-    public function delete($id)
+    public function toggleStatus($id)
     {
-        # code...
+        $student = Student::find($id);
+
+        $student->status = ($student->status) ? 0 : 1;
+
+        if ($student->save()) {
+            return response()->json([ 'status' => $student->status]);
+        }
     }
 
 }
