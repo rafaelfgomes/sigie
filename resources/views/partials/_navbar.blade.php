@@ -2,7 +2,7 @@
 
   <a class="navbar-brand" href="{{ route('dashboard')}}">
 
-    <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img src="{{ asset('images/sigielogo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
     SIGIE
   
   </a>

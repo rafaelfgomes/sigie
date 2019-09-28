@@ -15,7 +15,7 @@
       
       <div class="modal-body">
         
-        <form action="{{ route('institutions.save') }}" method="POST">
+        <form>
 
           <div class="form-group">
             <label for="name" class="col-form-label">Nome:&nbsp;</label>
@@ -28,7 +28,8 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="status" name="status">
+            <input type="hidden" name="status" value="off">
+            <input class="form-check-input" type="checkbox" id="status" name="status">
             <label class="form-check-label" for="status">
               Ativo
             </label>
@@ -36,15 +37,15 @@
 
         </form>
 
+        <div class="modal-footer">
+
+          <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+          <button type="button" id="register" class="btn btn-success">Cadastrar</button>
+
+        </div>
+
       </div>
       
-      <div class="modal-footer">
-
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-        <button type="submit" class="btn btn-success">Cadastrar</button>
-
-      </div>
-    
     </div>
 
   </div>

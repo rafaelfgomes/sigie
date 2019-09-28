@@ -18,29 +18,25 @@ class InstitutionController extends Controller
     public function store(Request $request)
     {
 
-        $status = 0;
-
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:80',
             'cnpj' => 'required|string|max:14',
-            'status' => 'required|boolean',
-        ]);
+            'status' => 'required',
+            ]);
 
-        if ($request->status) {
-            $status = 1;
-        }
-
-        if ($validatedData) {
-
-            Institution::create($request->all());
+        $data = [
+            'name' => $request->name,
+            'cnpj' => $request->cnpj,
+            'status' => $request->status
+        ];
         
-        }
+        $institution = Institution::create($data);
 
-        return redirect()->to(route('index'));
+        return response()->json([ 'institution' => $institution ]);
 
     }
 
-    public function show($id)
+    public function getInfo($id)
     {
 
         $institution = Institution::find($id);
@@ -49,19 +45,39 @@ class InstitutionController extends Controller
 
     }
 
-    public function edit()
+    public function update(Request $request, $id)
     {
-        # code...
+        $request->validate([
+            'name' => 'required|string|max:80',
+            'cnpj' => 'required|string|max:14',
+        ]);
+
+        $data = [
+            'name' => $request->name,
+            'cnpj' => $request->cnpj,
+        ];
+
+        $institution = Institution::where('id', $id)->update($data);
+
+        if ($institution) {
+            return response()->json([ 'message' => 'success' ]);
+        }
+
+        return response()->json([ 'message' => 'error' ]);
+
     }
 
-    public function update(Request $request)
+    public function toggleStatus($id)
     {
-        # code...
-    }
 
-    public function delete($id)
-    {
-        # code...
+        $institution = Institution::find($id);
+
+        $institution->status = ($institution->status) ? 0 : 1;
+
+        if ($institution->save()) {
+            return response()->json([ 'status' => $institution->status]);
+        }
+
     }
 
 }
