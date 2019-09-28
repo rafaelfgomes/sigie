@@ -40,7 +40,7 @@
         <div class="modal-footer">
 
           <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-          <button type="button" id="register" class="btn btn-success">Cadastrar</button>
+          <button type="button" id="register" class="btn btn-success" data-dismiss="modal">Cadastrar</button>
 
         </div>
 

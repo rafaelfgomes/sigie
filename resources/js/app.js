@@ -124,11 +124,10 @@ $('#institutionUpdateModal').on('show.bs.modal', function (event) {
         req = `${url}/update/${id}`
 
         axios.post(req, data)
-            .then((response) =>{
-                console.log(response.data)
+            .then(() =>{
                 toastr.success(`Insituição atualizada`)
             })
-            .catch((error) => {
+            .catch(() => {
                 toastr.error('Erro')
             })
 
@@ -173,9 +172,161 @@ $('#institutionStatusModal').on('show.bs.modal', function (event) {
                 //$(location).attr('href', url)
 
                 if (response.data.status == 0) {
-                    toastr.success('Desativado', 'Titulo')      
+                    toastr.success('Instituição desativada', '')      
                 } else {
-                    toastr.success('Ativado', 'Titulo')
+                    toastr.success('Instituição ativada', '')
+                }
+
+            })
+
+            modal.find('modal-footer button.close').click()
+
+            setTimeout(() => {
+                $(location).attr('href', url)
+            }, 4000);
+
+    })
+    
+})
+
+$('#courseRegisterModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Botão que acionou o modal
+    var modal = $(this)
+
+    // Extrai informação dos atributos data-*
+    var url = button.data('url')
+    var buttonRegister = modal.find('.modal-footer button#register')
+
+    buttonRegister.click(() => {
+
+        data = {
+            name: modal.find('.modal-body form input#name').val(),
+            status: (modal.find('.modal-body form input#status').is(":checked")) ? 1 : 0
+        }
+
+        axios.post(url, data)
+        .then((response) =>{
+            toastr.success(`Curso ${response.data.course.name} cadastrado`)
+        })
+        .catch((error) => {
+            toastr.error('Erro')
+        })
+
+        modal.find('modal-footer button#close').click()
+
+        setTimeout(() => {
+            $(location).attr('href', url)
+        }, 4000);
+
+    })
+
+})
+
+$('#courseShowModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Botão que acionou o modal
+    
+    // Extrai informação dos atributos data-*
+    var id = button.data('id')
+    var url = button.data('url')
+
+    req = `${url}/info/${id}`
+
+    axios.get(req)
+    .then((response) => {
+
+        var name = response.data.course.name
+        var status = (response.data.course.status == 1) ? 'Ativo' : 'Inativo'
+
+        var modal = $(this)
+
+        modal.find('.modal-title').text(`Dados do curso ${name}`)
+
+        modal.find('.modal-body input#name').val(name)
+        modal.find('.modal-body input#status').val(status)
+    })
+    
+})
+
+$('#courseUpdateModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Botão que acionou o modal
+    var modal = $(this)
+
+    // Extrai informação dos atributos data-*
+    var id = button.data('id')
+    var url = button.data('url')
+    var buttonUpdate = modal.find('.modal-footer button#update')
+
+    req = `${url}/info/${id}`
+
+    axios.get(req)
+    .then((response) => {
+
+        var name = response.data.course.name
+
+        modal.find('.modal-body input#name').val(name)
+
+    })
+
+    buttonUpdate.click(() => {
+
+        data = {
+            name: modal.find('.modal-body form input#name').val()
+        }
+
+        req = `${url}/update/${id}`
+
+        axios.post(req, data)
+            .then(() =>{
+                toastr.success(`Curso atualizado`)
+            })
+            .catch(() => {
+                toastr.error('Erro')
+            })
+
+        modal.find('modal-footer button#close').click()
+
+        setTimeout(() => {
+            $(location).attr('href', url)
+        }, 4000)
+    
+    })
+
+})
+
+$('#courseStatusModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Botão que acionou o modal
+    var modal = $(this)
+    
+    // Extrai informação dos atributos data-*
+    var id = button.data('id')
+    var status = button.data('status')
+    var name = button.data('name')
+    var url = button.data('url')
+    var buttonStatus = modal.find('.modal-footer button#status')
+
+    if (status == 1) {
+        modal.find('.modal-body p.text-status').text(`Deseja desativar o curso ${name}?`)
+        buttonStatus.removeClass().addClass('btn btn-danger')
+        buttonStatus.text('Desativar')    
+    } else {
+        modal.find('.modal-body p.text-status').text(`Deseja ativar o curso ${name}?`)
+        buttonStatus.removeClass().addClass('btn btn-success')
+        buttonStatus.text('Ativar')
+    }
+    
+    buttonStatus.click(() => {
+
+        var req = `${url}/toggle/${id}`
+
+        axios.get(req)
+            .then((response) => {
+
+                //$(location).attr('href', url)
+
+                if (response.data.status == 0) {
+                    toastr.success('Curso desativado', '')      
+                } else {
+                    toastr.success('Curso ativado', '')
                 }
 
             })

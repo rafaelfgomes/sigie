@@ -1,4 +1,4 @@
-<div class="modal fade" id="institutionStatusModal" tabindex="-1" role="dialog" aria-labelledby="institutionStatusModalLabel" aria-hidden="true">
+<div class="modal fade" id="courseStatusModal" tabindex="-1" role="dialog" aria-labelledby="courseStatusModalLabel" aria-hidden="true">
 
   <div class="modal-dialog" role="document">
   
@@ -6,7 +6,7 @@
         
         <div class="modal-header">
 
-            <h5 class="modal-title" id="institutionStatusModal">Mudar status da instituição</h5>
+            <h5 class="modal-title" id="courseStatusModal">Mudar status da instituição</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

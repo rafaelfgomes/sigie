@@ -24,27 +24,56 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        # code...
+        $request->validate([
+            'name' => 'required|string|max:80',
+            'status' => 'required',
+            ]);
+
+        $data = [
+            'name' => $request->name,
+            'status' => $request->status
+        ];
+        
+        $course = Course::create($data);
+
+        return response()->json([ 'course' => $course ]);
     }
 
-    public function show($id)
+    public function getInfo($id)
     {
-        # code...
+        $course = Course::find($id);
+
+        return response()->json([ 'course' => $course ]);
     }
 
-    public function edit()
+    public function update(Request $request, $id)
     {
-        # code...
+        $request->validate([
+            'name' => 'required|string|max:80'
+        ]);
+
+        $data = [
+            'name' => $request->name,
+        ];
+
+        $course = Course::where('id', $id)->update($data);
+
+        if ($course) {
+            return response()->json([ 'message' => 'success' ]);
+        }
+
+        return response()->json([ 'message' => 'error' ]);
     }
 
-    public function update(Request $request)
+    public function toggleStatus($id)
     {
-        # code...
-    }
+        $course = Course::find($id);
 
-    public function delete($id)
-    {
-        # code...
+        $course->status = ($course->status) ? 0 : 1;
+
+        if ($course->save()) {
+            return response()->json([ 'status' => $course->status]);
+        }
     }
 
 }

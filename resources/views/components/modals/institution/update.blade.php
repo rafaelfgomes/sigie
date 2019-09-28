@@ -32,7 +32,7 @@
           <div class="modal-footer">
   
             <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-            <button type="submit" id="update" class="btn btn-success">Atualizar</button>
+            <button type="submit" id="update" class="btn btn-success" data-dismiss="modal">Atualizar</button>
 
           </div>
   
