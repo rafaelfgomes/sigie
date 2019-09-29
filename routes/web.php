@@ -46,3 +46,7 @@ Route::group(['prefix' => 'students'], function () {
     Route::get('toggle/{id}', 'StudentController@toggleStatus')->name('student.status');
 
 });
+
+Route::group(['prefix' => 'enrolments'], function () {
+    Route::get('/', 'EnrolmentController@index')->name('enrolments');
+});

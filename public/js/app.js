@@ -55490,6 +55490,16 @@ $('#zipcode').on('focus', function () {
 $('#zipcode-update').on('focus', function () {
   $(this).removeClass('text-danger is-invalid').val('');
 });
+$('#select-students').change(function () {
+  var selectedStudentId = $(this).children("option:selected").val();
+  var selectedStudentName = $(this).children("option:selected").html();
+  $('#add-student').on('click', function () {
+    $('#students-list').children().each(function (i, v) {
+      console.log(v.nodeValue);
+    });
+    $('#students-list').append("<li class=\"list-group-item\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "</li>"));
+  });
+});
 
 /***/ }),
 
