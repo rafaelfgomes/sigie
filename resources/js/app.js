@@ -353,7 +353,18 @@ $('#studentRegisterModal').on('show.bs.modal', function (event) {
 
         data = {
             name: modal.find('.modal-body form input#name').val(),
-            status: (modal.find('.modal-body form input#status').is(":checked")) ? 1 : 0
+            cpf: modal.find('.modal-body form input#cpf').val(),
+            birth_date: modal.find('.modal-body form input#birth-date').val(),
+            email: modal.find('.modal-body form input#email').val(),
+            status: (modal.find('.modal-body form input#status').is(":checked")) ? 1 : 0,
+            phone: modal.find('.modal-body form input#phone').val(),
+            mobile: modal.find('.modal-body form input#mobile').val(),
+            zipcode: modal.find('.modal-body form input#zipcode').val(),
+            street: modal.find('.modal-body form input#street').val(),
+            number: modal.find('.modal-body form input#number').val(),
+            neighbour: modal.find('.modal-body form input#neighbour').val(),
+            city: modal.find('.modal-body form input#city').val(),
+            state: modal.find('.modal-body form input#state').val()
         }
 
         axios.post(url, data)
@@ -362,13 +373,12 @@ $('#studentRegisterModal').on('show.bs.modal', function (event) {
         })
         .catch((error) => {
             toastr.error('Erro')
+            console.log(error)
         })
 
-        modal.find('modal-footer button#close').click()
-
-        setTimeout(() => {
-            $(location).attr('href', url)
-        }, 4000);
+        // setTimeout(() => {
+        //     $(location).attr('href', url)
+        // }, 4000);
 
     })
 
@@ -391,6 +401,15 @@ $('#studentShowModal').on('show.bs.modal', function (event) {
         var birthDate = response.data.student.birth_date
         var email = response.data.student.email
         var status = (response.data.student.status == 1) ? 'Ativo' : 'Inativo'
+        var email = response.data.student.email
+        var phone = response.data.student.contacts[0].phone
+        var mobile = response.data.student.contacts[0].mobile
+        var street = response.data.student.address[0].street
+        var number = response.data.student.address[0].number
+        var neighbour = response.data.student.address[0].neighbour
+        var zipcode = response.data.student.address[0].zipcode
+        var city = response.data.student.address[0].city
+        var state = response.data.student.address[0].state
 
         var modal = $(this)
 
@@ -401,6 +420,14 @@ $('#studentShowModal').on('show.bs.modal', function (event) {
         modal.find('.modal-body input#birth-date').val(birthDate)
         modal.find('.modal-body input#email').val(email)
         modal.find('.modal-body input#status').val(status)
+        modal.find('.modal-body input#phone').val(phone)
+        modal.find('.modal-body input#mobile').val(mobile)
+        modal.find('.modal-body input#street').val(street)
+        modal.find('.modal-body input#street').val(number)
+        modal.find('.modal-body input#neighbour').val(neighbour)
+        modal.find('.modal-body input#zipcode').val(zipcode)
+        modal.find('.modal-body input#city').val(city)
+        modal.find('.modal-body input#state').val(state)
     })
     
 })
@@ -420,15 +447,55 @@ $('#studentUpdateModal').on('show.bs.modal', function (event) {
     .then((response) => {
 
         var name = response.data.student.name
+        var cpf = response.data.student.cpf
+        var birthDate = response.data.student.birth_date
+        var email = response.data.student.email
+        var phone = response.data.student.contacts[0].phone
+        var mobile = response.data.student.contacts[0].mobile
+        var street = response.data.student.address[0].street
+        var number = response.data.student.address[0].number
+        var neighbour = response.data.student.address[0].neighbour
+        var zipcode = response.data.student.address[0].zipcode
+        var city = response.data.student.address[0].city
+        var state = response.data.student.address[0].state
+
+        var modal = $(this)
+
+        var formatedDate = moment(birthDate).format('D/MM/Y')
+
+        modal.find('.modal-title').text(`Dados do estudante ${name}`)
 
         modal.find('.modal-body input#name').val(name)
+        modal.find('.modal-body input#cpf').val(cpf)
+        modal.find('.modal-body input#birth-date').val(formatedDate)
+        modal.find('.modal-body input#email').val(email)
+        modal.find('.modal-body input#phone').val(phone)
+        modal.find('.modal-body input#mobile').val(mobile)
+        modal.find('.modal-body input#street').val(street)
+        modal.find('.modal-body input#number').val(number)
+        modal.find('.modal-body input#neighbour').val(neighbour)
+        modal.find('.modal-body input#zipcode').val(zipcode)
+        modal.find('.modal-body input#city').val(city)
+        modal.find('.modal-body input#state').val(state)
 
     })
 
     buttonUpdate.click(() => {
 
         data = {
-            name: modal.find('.modal-body form input#name').val()
+            id: id,
+            name: modal.find('.modal-body input#name').val(),
+            cpf: modal.find('.modal-body input#cpf').val(),
+            birth_date: modal.find('.modal-body input#birth-date').val(),
+            email: modal.find('.modal-body input#email').val(),
+            phone: modal.find('.modal-body input#phone').val(),
+            mobile: modal.find('.modal-body input#mobile').val(),
+            street: modal.find('.modal-body input#street').val(),
+            number: modal.find('.modal-body input#number').val(),
+            neighbour: modal.find('.modal-body input#neighbour').val(),
+            zipcode: modal.find('.modal-body input#zipcode').val(),
+            city: modal.find('.modal-body input#city').val(),
+            state: modal.find('.modal-body input#state').val()
         }
 
         req = `${url}/update/${id}`
@@ -493,4 +560,47 @@ $('#studentStatusModal').on('show.bs.modal', function (event) {
 
     })
     
+})
+
+$('#zipcode').on('blur', function () {
+
+    var zipcode = $(this).val()
+
+    if (zipcode.length == 8) {
+
+        axios.get(`https://viacep.com.br/ws/${zipcode}/json/`)
+        .then((response) => {
+
+            $('#street').val('')
+            $('#number').val('')
+            $('#neighbour').val('')
+            $('#city').val('')
+            $('#state').val('')
+            
+            var address = {
+                street: response.data.logradouro,
+                neighbour: response.data.bairro,
+                city: response.data.localidade,
+                state: response.data.uf,
+            }
+
+            $('#street').val(address.street)
+            $('#neighbour').val(address.neighbour)
+            $('#city').val(address.city)
+            $('#state').val(address.state)
+
+            $('#number').focus()
+        })
+        .catch(() => {
+            $('#zipcode').addClass('text-danger').val('CEP inválido')
+        })
+
+    } else {
+        $('#zipcode').addClass('text-danger is-invalid').val('Formato de CEP inválido')
+    }
+
+})
+
+$('#zipcode').on('focus', function() {
+    $(this).removeClass('text-danger is-invalid').val('')
 })

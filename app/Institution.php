@@ -12,7 +12,7 @@ class Institution extends Model
     public function courses()
     {
 
-        return $this->hasMany('App\Course');
+        return $this->belongsToMany('App\Course');
     
     }
 

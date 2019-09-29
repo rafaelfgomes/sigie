@@ -2,6 +2,22 @@
 
 @section('content')
 
+  <div class="row">
+
+    <div class="col">
+
+        <h1 class="text-center mb-4">Estudantes</h1>
+
+    </div>
+
+    <div class="col text-right">
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentRegisterModal" data-url="{{ route('students') }}">Adicionar novo estudante</button>
+
+    </div>
+  
+  </div>
+
   <table class="table" id="studentss">
 
     <thead class="thead-dark">

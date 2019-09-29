@@ -10,11 +10,16 @@ class Student extends Model
 
     public function address()
     {
-        return $this->hasOne('App\Address');
+        return $this->hasMany('App\Address');
     }
 
     public function contacts()
     {
         return $this->hasMany('App\Contact');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Course');
     }
 }

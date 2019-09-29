@@ -17,6 +17,8 @@ class CreateContactsTable extends Migration
             $table->bigIncrements('id');
             $table->string('phone', 8);
             $table->string('mobile', 9);
+            $table->bigInteger('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }
