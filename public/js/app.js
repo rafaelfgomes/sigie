@@ -55490,15 +55490,50 @@ $('#zipcode').on('focus', function () {
 $('#zipcode-update').on('focus', function () {
   $(this).removeClass('text-danger is-invalid').val('');
 });
-$('#select-students').change(function () {
-  var selectedStudentId = $(this).children("option:selected").val();
-  var selectedStudentName = $(this).children("option:selected").html();
-  $('#add-student').on('click', function () {
-    $('#students-list').children().each(function (i, v) {
-      console.log(v.nodeValue);
-    });
-    $('#students-list').append("<li class=\"list-group-item\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "</li>"));
+$('#add-student').on('click', function () {
+  var selectedStudentId = $('#select-students').children("option:selected").val();
+  var selectedStudentName = $('#select-students').children("option:selected").html();
+  var students = $('#students-list').children().each(function (i, v) {
+    return v;
   });
+
+  if (selectedStudentId == 0) {
+    toastr.warning('É preciso escolher um estudante');
+  } else {
+    $('#list').removeClass('d-none');
+
+    if (students.length == 0) {
+      $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
+    } else {
+      if (students.length > 40) {
+        toastr.warning('Curso com o limite máximo de estudantes');
+      } else {
+        var exists = students.map(function (i, v) {
+          console.log(v['value']); //console.log(selectedStudentId)
+
+          return v['value'] == selectedStudentId ? true : false;
+        });
+
+        if (exists[0]) {
+          toastr.warning('Estudante já adicionado');
+        } else {
+          $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
+        }
+      }
+    }
+  }
+});
+$('body').on('click', '#student-remove', function () {
+  $('#student-remove').parent().remove();
+  var students = $('#students-list').children().each(function (i, v) {
+    return v;
+  });
+
+  if (students.length == 0) {
+    $('#list').addClass('d-none');
+  }
+
+  console.log();
 });
 
 /***/ }),

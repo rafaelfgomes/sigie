@@ -66,6 +66,8 @@
         
         <select class="form-control" id="select-students">
 
+          <option value="0">Escolha um estudante</option>
+
           @foreach ($students as $student)
 
             <option value="{{ $student->id }}">{{ $student->name }}</option>
@@ -88,13 +90,19 @@
 
   <div class="row">
 
-    <div class="col">
+    <div id="list" class="col d-none">
 
       <label>Alunos escolhidos</label>
 
-      <ul class="list-group" id="students-list">
+      <ul class="list-group" id="students-list"></ul>
 
-      </ul>
+      <p>&nbsp;</p>
+
+      <div class="text-center">
+
+        <button type="button" id="add-student" class="btn btn-success">Matricular alunos</button>
+
+      </div>
 
     </div>
 
