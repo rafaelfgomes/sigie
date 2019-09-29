@@ -1,6 +1,6 @@
 <div class="modal fade" id="studentUpdateModal" tabindex="-1" role="dialog" aria-labelledby="studentUpdateModalLabel" aria-hidden="true">
   
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       
       <div class="modal-content">
         
@@ -64,33 +64,33 @@
               <legend>Endereço</legend>
   
               <div class="form-group">
-                <label for="zipcode" class="col-form-label">CEP:&nbsp;</label>
-                <input type="text" class="form-control" id="zipcode" maxlength="8" name="zipcode">
+                <label for="zipcode-update" class="col-form-label">CEP:&nbsp;</label>
+                <input type="text" class="form-control" id="zipcode-update" maxlength="8" name="zipcode">
               </div>
               
               <div class="form-group">
-                <label for="street" class="col-form-label">Endereço:&nbsp;</label>
-                <input type="text" readonly class="form-control-plaintext" id="street" name="street">
+                <label for="street-update" class="col-form-label">Endereço:&nbsp;</label>
+                <input type="text" readonly class="form-control-plaintext" id="street-update" name="street">
               </div>
     
               <div class="form-group">
-                <label for="number" class="col-form-label">Nº:&nbsp;</label>
-                <input type="text" class="form-control" id="number" name="number">
+                <label for="number-update" class="col-form-label">Nº:&nbsp;</label>
+                <input type="text" class="form-control" id="number-update" name="number">
               </div>
     
               <div class="form-group">
-                <label for="neighbour" class="col-form-label">Bairro:&nbsp;</label>
-                <input type="text" readonly class="form-control-plaintext" id="neighbour" name="neighbour">
+                <label for="neighbour-update" class="col-form-label">Bairro:&nbsp;</label>
+                <input type="text" readonly class="form-control-plaintext" id="neighbour-update" name="neighbour">
               </div>
     
               <div class="form-group">
-                <label for="city" class="col-form-label">Cidade:&nbsp;</label>
-                <input type="text" readonly class="form-control-plaintext" id="city" name="city">
+                <label for="city-update" class="col-form-label">Cidade:&nbsp;</label>
+                <input type="text" readonly class="form-control-plaintext" id="city-update" name="city">
               </div>
   
               <div class="form-group">
-                <label for="state" class="col-form-label">Estado:&nbsp;</label>
-                <input type="text" readonly class="form-control-plaintext" id="state" name="state">
+                <label for="state-update" class="col-form-label">Estado:&nbsp;</label>
+                <input type="text" readonly class="form-control-plaintext" id="state-update" name="state">
               </div>
   
             </fieldset>

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class InstitutionController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $institutions = Institution::paginate(4);        
@@ -75,7 +80,7 @@ class InstitutionController extends Controller
         $institution->status = ($institution->status) ? 0 : 1;
 
         if ($institution->save()) {
-            return response()->json([ 'status' => $institution->status]);
+            return response()->json([ 'status' => $institution->status ]);
         }
 
     }

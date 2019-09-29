@@ -1,6 +1,6 @@
 <div class="modal fade" id="studentShowModal" tabindex="-1" role="dialog" aria-labelledby="studentShowModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     
     <div class="modal-content">
       
@@ -40,6 +40,41 @@
           <div class="form-group">
               <label for="status">Status:&nbsp;</label>
               <input type="text" readonly class="form-control-plaintext" id="status" name="status">
+          </div>
+
+          <div class="form-group">
+              <label for="phone">Telefone:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="phone" name="phone">
+          </div>
+
+          <div class="form-group">
+              <label for="mobile">Celular:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="mobile" name="mobile">
+          </div>
+
+          <div class="form-group">
+              <label for="street">Endereço:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="street" name="street">
+          </div>
+
+          <div class="form-group">
+              <label for="number">Nª:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="number" name="number">
+          </div>
+
+          <div class="form-group">
+              <label for="neighbour">Bairro:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="neighbour" name="neighbour">
+          </div>
+
+          <div class="form-group">
+              <label for="city">Cidade:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="city" name="city">
+          </div>
+
+          <div class="form-group">
+              <label for="state">Estado:&nbsp;</label>
+              <input type="text" readonly class="form-control-plaintext" id="state" name="state">
           </div>
 
         </form>

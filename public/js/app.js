@@ -55313,16 +55313,17 @@ $('#studentShowModal').on('show.bs.modal', function (event) {
     var city = response.data.student.address[0].city;
     var state = response.data.student.address[0].state;
     var modal = $(_this3);
+    var formatedDate = moment(birthDate).format('D/MM/Y');
     modal.find('.modal-title').text("Dados do estudante ".concat(name));
     modal.find('.modal-body input#name').val(name);
     modal.find('.modal-body input#cpf').val(cpf);
-    modal.find('.modal-body input#birth-date').val(birthDate);
+    modal.find('.modal-body input#birth-date').val(formatedDate);
     modal.find('.modal-body input#email').val(email);
     modal.find('.modal-body input#status').val(status);
     modal.find('.modal-body input#phone').val(phone);
     modal.find('.modal-body input#mobile').val(mobile);
     modal.find('.modal-body input#street').val(street);
-    modal.find('.modal-body input#street').val(number);
+    modal.find('.modal-body input#number').val(number);
     modal.find('.modal-body input#neighbour').val(neighbour);
     modal.find('.modal-body input#zipcode').val(zipcode);
     modal.find('.modal-body input#city').val(city);
@@ -55362,12 +55363,12 @@ $('#studentUpdateModal').on('show.bs.modal', function (event) {
     modal.find('.modal-body input#email').val(email);
     modal.find('.modal-body input#phone').val(phone);
     modal.find('.modal-body input#mobile').val(mobile);
-    modal.find('.modal-body input#street').val(street);
-    modal.find('.modal-body input#number').val(number);
-    modal.find('.modal-body input#neighbour').val(neighbour);
-    modal.find('.modal-body input#zipcode').val(zipcode);
-    modal.find('.modal-body input#city').val(city);
-    modal.find('.modal-body input#state').val(state);
+    modal.find('.modal-body input#street-update').val(street);
+    modal.find('.modal-body input#number-update').val(number);
+    modal.find('.modal-body input#neighbour-update').val(neighbour);
+    modal.find('.modal-body input#zipcode-update').val(zipcode);
+    modal.find('.modal-body input#city-update').val(city);
+    modal.find('.modal-body input#state-update').val(state);
   });
   buttonUpdate.click(function () {
     data = {
@@ -55378,12 +55379,12 @@ $('#studentUpdateModal').on('show.bs.modal', function (event) {
       email: modal.find('.modal-body input#email').val(),
       phone: modal.find('.modal-body input#phone').val(),
       mobile: modal.find('.modal-body input#mobile').val(),
-      street: modal.find('.modal-body input#street').val(),
-      number: modal.find('.modal-body input#number').val(),
-      neighbour: modal.find('.modal-body input#neighbour').val(),
-      zipcode: modal.find('.modal-body input#zipcode').val(),
-      city: modal.find('.modal-body input#city').val(),
-      state: modal.find('.modal-body input#state').val()
+      street: modal.find('.modal-body input#street-update').val(),
+      number: modal.find('.modal-body input#number-update').val(),
+      neighbour: modal.find('.modal-body input#neighbour-update').val(),
+      zipcode: modal.find('.modal-body input#zipcode-update').val(),
+      city: modal.find('.modal-body input#city-update').val(),
+      state: modal.find('.modal-body input#state-update').val()
     };
     req = "".concat(url, "/update/").concat(id);
     axios.post(req, data).then(function () {
@@ -55454,13 +55455,39 @@ $('#zipcode').on('blur', function () {
       $('#state').val(address.state);
       $('#number').focus();
     })["catch"](function () {
-      $('#zipcode').addClass('text-danger').val('CEP inválido');
+      $('#zipcode #zipcode-update').addClass('text-danger').val('CEP inválido');
     });
   } else {
-    $('#zipcode').addClass('text-danger is-invalid').val('Formato de CEP inválido');
+    $('#zipcode $zipcode-update').addClass('text-danger is-invalid').val('Formato de CEP inválido');
+  }
+});
+$('#zipcode-update').on('blur', function () {
+  var zipcode = $(this).val();
+
+  if (zipcode.length == 8) {
+    axios.get("https://viacep.com.br/ws/".concat(zipcode, "/json/")).then(function (response) {
+      var address = {
+        street: response.data.logradouro,
+        neighbour: response.data.bairro,
+        city: response.data.localidade,
+        state: response.data.uf
+      };
+      $('#street-update').val(address.street);
+      $('#neighbour-update').val(address.neighbour);
+      $('#city-update').val(address.city);
+      $('#state-update').val(address.state);
+      $('#number-update').focus();
+    })["catch"](function () {
+      $('#zipcode-update').addClass('text-danger').val('CEP inválido');
+    });
+  } else {
+    $('#zipcode-update').addClass('text-danger is-invalid').val('Formato de CEP inválido');
   }
 });
 $('#zipcode').on('focus', function () {
+  $(this).removeClass('text-danger is-invalid').val('');
+});
+$('#zipcode-update').on('focus', function () {
   $(this).removeClass('text-danger is-invalid').val('');
 });
 

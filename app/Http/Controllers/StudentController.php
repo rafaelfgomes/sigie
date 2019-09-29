@@ -127,7 +127,7 @@ class StudentController extends Controller
         $student->contacts()->update($contact);
         $student->address()->update($address);
 
-        return response()->json([ 'student' => $student ]);
+        return response()->json([ 'message' => 'success' ]);
     }
 
     public function toggleStatus($id)
