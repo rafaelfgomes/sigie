@@ -644,7 +644,6 @@ $('#zipcode-update').on('focus', function() {
     $(this).removeClass('text-danger is-invalid').val('')
 })
 
-
 $('#add-student').on('click', () => {
 
     var selectedStudentId = $('#select-students').children("option:selected").val()
@@ -664,7 +663,7 @@ $('#add-student').on('click', () => {
 
         if (students.length == 0) {
             
-            $('#students-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedStudentId}">${selectedStudentName}<button type="button" id="student-remove" data-id="${selectedStudentId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
+            $('#students-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedStudentId}" data-name="${selectedStudentName}">${selectedStudentName}<button type="button" id="student-remove" data-id="${selectedStudentId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
     
         } else {
     
@@ -674,32 +673,24 @@ $('#add-student').on('click', () => {
                 
             } else {
 
-                var exists = students.map((i, v) => {
-                    console.log(v['value'])
-                    //console.log(selectedStudentId)
+                $('#students-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedStudentId}">${selectedStudentName}<button type="button" id="student-remove" data-id="${selectedStudentId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
 
-                    return (v['value'] == selectedStudentId) ? true : false 
-                })
-                
-                if (exists[0]) {
-                    
-                    toastr.warning('Estudante já adicionado')
-        
-                } else {
-                    
-                    $('#students-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedStudentId}">${selectedStudentName}<button type="button" id="student-remove" data-id="${selectedStudentId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
-        
-                }
-    
             }        
     
         }
+
+        $(`#select-students option[value=${selectedStudentId}]`).attr('disabled', 'disabled')
+        $('#select-students').prop('selectedIndex', 0)
         
     }
 
 })
 
-$('body').on('click', '#student-remove', () => {
+$('body').on('click', '#student-remove', () => {    
+
+    var id = $('#student-remove').data('id')
+
+    $(`#select-students option[value=${id}]`).removeAttr('disabled')
 
     $('#student-remove').parent().remove()
 
@@ -713,6 +704,32 @@ $('body').on('click', '#student-remove', () => {
 
     }
 
-    console.log()
+})
+
+$('body').on('click', '#enrol-student', () => {
+
+    var institution = $('#select-institutions').children("option:selected").val()
+    var course = $('#select-courses').children("option:selected").val()
+
+    var students = $('#students-list').children().each((i, v) => {
+        return v        
+    })
+
+    if (institution == 0) {
+        
+        toastr.warning('É preciso escolher uma instituição!!')
+
+    } else if (course == 0) {
+
+        toastr.warning('É preciso escolher um curso!!')
+
+    } else {
+
+        
+
+    }
+
+    console.log(institution);
+    
 
 })

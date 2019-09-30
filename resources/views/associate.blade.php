@@ -6,13 +6,13 @@
 
     <div class="col">
 
-        <h1 class="text-center mb-4">Realizar matrículas</h1>
+      <h1 class="text-center mb-4">Associar cursos</h1>
 
     </div>
   
   </div>
 
-  <div class="row">
+  <div class="row mt-4">
 
     <div class="col">
 
@@ -35,7 +35,7 @@
       </div>
 
     </div>
-    
+
     <div class="col">
 
       <div class="form-group">
@@ -56,35 +56,29 @@
 
       </div>
 
+      <div class="col text-center">
+
+        <button type="button" id="add-course" class="btn btn-success">Adicionar na lista</button>
+  
+      </div>
+
     </div>
 
   </div>
 
   <div class="row">
 
-    <div class="col">
+    <div class="col d-none">
 
-      <div class="form-group">
+      <label>Cursos escolhidos</label>
 
-        <label for="select-students">Escolha o aluno</label>
-        
-        <select class="form-control" id="select-students">
+      <ul class="list-group" id="courses-list"></ul>
 
-          <option value="0">Selecione</option>
-
-          @foreach ($students as $student)
-
-            <option id="{{ $student->id }}" value="{{ $student->id }}">{{ $student->name }}</option>
-              
-          @endforeach
-
-        </select>
-
-      </div>
+      <p>&nbsp;</p>
 
       <div class="text-center">
 
-        <button type="button" id="add-student" class="btn btn-success">Adicionar na lista</button>
+        <button type="button" id="resgister-courses" class="btn btn-success">Cadastrar cursos</button>
 
       </div>
 
@@ -92,24 +86,4 @@
   
   </div>
 
-  <div class="row">
-
-    <div id="list" class="col d-none">
-
-      <label>Alunos escolhidos</label>
-
-      <ul class="list-group" id="students-list"></ul>
-
-      <p>&nbsp;</p>
-
-      <div class="text-center">
-
-        <button type="button" id="enrol-student" class="btn btn-success">Matricular alunos</button>
-
-      </div>
-
-    </div>
-
-  </div>
-    
 @endsection

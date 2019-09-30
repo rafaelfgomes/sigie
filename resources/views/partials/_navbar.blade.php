@@ -30,6 +30,10 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ route('associations') }}">Associar cursos</a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ route('enrolments') }}">Matrículas</a>
       </li>
       

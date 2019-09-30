@@ -52,9 +52,9 @@
 
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <div class="col">
+        <div class="col-6">
 
             <div class="card" style="height: 260px">
 
@@ -68,20 +68,6 @@
                 
                 </div>
 
-            </div>
-
-        </div>
-
-        <div class="col">
-
-            <div class="card" style="height: 260px">
-
-                <div class="card-body">
-                    
-                    
-
-                </div>
-                
             </div>
 
         </div>

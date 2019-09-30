@@ -55503,27 +55503,22 @@ $('#add-student').on('click', function () {
     $('#list').removeClass('d-none');
 
     if (students.length == 0) {
-      $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
+      $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\" data-name=\"").concat(selectedStudentName, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
     } else {
       if (students.length > 40) {
         toastr.warning('Curso com o limite máximo de estudantes');
       } else {
-        var exists = students.map(function (i, v) {
-          console.log(v['value']); //console.log(selectedStudentId)
-
-          return v['value'] == selectedStudentId ? true : false;
-        });
-
-        if (exists[0]) {
-          toastr.warning('Estudante já adicionado');
-        } else {
-          $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
-        }
+        $('#students-list').append("<li class=\"list-group-item d-flex justify-content-between align-items-center\" value=\"".concat(selectedStudentId, "\">").concat(selectedStudentName, "<button type=\"button\" id=\"student-remove\" data-id=\"").concat(selectedStudentId, "\" class=\"btn btn-outline-danger\"><i class=\"fas fa-times\"></i></button></li>"));
       }
     }
+
+    $("#select-students option[value=".concat(selectedStudentId, "]")).attr('disabled', 'disabled');
+    $('#select-students').prop('selectedIndex', 0);
   }
 });
 $('body').on('click', '#student-remove', function () {
+  var id = $('#student-remove').data('id');
+  $("#select-students option[value=".concat(id, "]")).removeAttr('disabled');
   $('#student-remove').parent().remove();
   var students = $('#students-list').children().each(function (i, v) {
     return v;
@@ -55532,8 +55527,21 @@ $('body').on('click', '#student-remove', function () {
   if (students.length == 0) {
     $('#list').addClass('d-none');
   }
+});
+$('body').on('click', '#enrol-student', function () {
+  var institution = $('#select-institutions').children("option:selected").val();
+  var course = $('#select-courses').children("option:selected").val();
+  var students = $('#students-list').children().each(function (i, v) {
+    return v;
+  });
 
-  console.log();
+  if (institution == 0) {
+    toastr.warning('É preciso escolher uma instituição!!');
+  } else if (course == 0) {
+    toastr.warning('É preciso escolher um curso!!');
+  } else {}
+
+  console.log(institution);
 });
 
 /***/ }),

@@ -50,3 +50,7 @@ Route::group(['prefix' => 'students'], function () {
 Route::group(['prefix' => 'enrolments'], function () {
     Route::get('/', 'EnrolmentController@index')->name('enrolments');
 });
+
+Route::group(['prefix' => 'associations'], function () {
+    Route::get('/', 'AssociationsController@index')->name('associations');
+});
