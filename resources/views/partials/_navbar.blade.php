@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
 
   <a class="navbar-brand" href="{{ route('dashboard')}}">
 
@@ -30,9 +30,27 @@
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="{{ route('enrolments') }}">Matrículas</a>
-        </li>
+        <a class="nav-link" href="{{ route('enrolments') }}">Matrículas</a>
+      </li>
       
+    </ul>
+
+    <ul class="nav navbar-nav ml-auto">
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ Auth::user()->name }}
+        </a>
+        
+        <div class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
+          <form class="text-right" action="{{ route('logout') }}" method="post">
+            <button type="submit" class="btn btn-link text-decoration-none" style="font-size: 15px; color: black;">Logout</button>
+          </form>
+        </div>
+      
+      </li>
+
     </ul>
 
   </div>
