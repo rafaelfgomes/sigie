@@ -2,11 +2,19 @@
 
 @section('content')
 
-  <h1 class="text-center mb-4">Instituições</h1>
+  <div class="row">
 
-  <div class="d-flex justify-content-center mb-4">
+    <div class="col">
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#institutionRegisterModal" data-register="{{ 'Teste' }}">Adicionar nova instituição</button>
+        <h1 class="text-center mb-4">Instituições</h1>
+
+    </div>
+
+    <div class="col text-right">
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#institutionRegisterModal" data-url="{{ route('institutions') }}">Adicionar nova instituição</button>
+
+    </div>
   
   </div>
 
@@ -17,8 +25,6 @@
       <tr class="text-center">
         <th scope="col">#</th>
         <th scope="col">Nome</th>
-        <th scope="col">CNPJ</th>
-        <th scope="col">Status</th>
         <th scope="col">Ações</th>
       </tr>
     
@@ -31,14 +37,18 @@
         <tr class="text-center">
 
           <th scope="row">{{ $institution->id }}</th>
-          <td>{{ $institution->name }}</td>
-          <td>{{ $institution->cnpj }}</td>
-          <td>{{ $institution->status }}</td>
+            <td>{{ $institution->name }}</td>
           <td>
   
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#institutionShowModal" data-edit="Teste" style="width: 40px;"><i class="far fa-eye"></i></button>
-            <button type="button" class="btn btn-secondary" style="width: 40px;"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger" style="width: 40px;"><i class="fas fa-trash"></i></button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#institutionShowModal" data-url="{{ route('institutions') }}" data-id="{{ $institution->id }}" style="width: 40px;"><i class="far fa-eye"></i></button>
+
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#institutionUpdateModal" data-url="{{ route('institutions') }}" data-id="{{ $institution->id }}" style="width: 40px;"><i class="fas fa-edit"></i></button>
+
+            @if ($institution->status == 0)
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#institutionStatusModal" data-url="{{ route('institutions') }}" data-status="{{ $institution->status }}" data-name="{{ $institution->name }}" data-id="{{ $institution->id }}" style="width: 40px;"><i class="fas fa-check"></i></i></button>                
+            @else
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#institutionStatusModal" data-url="{{ route('institutions') }}" data-status="{{ $institution->status }}" data-name="{{ $institution->name }}" data-id="{{ $institution->id }}" style="width: 40px;"><i class="fas fa-times"></i></button>
+            @endif
   
           </td>
   
@@ -61,25 +71,10 @@
   <div>
 
     @include('components.modals.institution.register')
-    @include('components.modals.institution.edit')
+    @include('components.modals.institution.update')
     @include('components.modals.institution.show')
+    @include('components.modals.institution.status')
 
   </div>
-
-  <script>
-  
-    $('#institutionShowModal').on('show.bs.modal', function (event) {
-      
-      var button = $(event.relatedTarget)
-      let data = button.data('edit') 
-
-      var modal = $(this)
-      
-      modal.find('#name').val(data)
-      modal.find('#cnpj').val(data)
-    
-    })
-  
-  </script>
     
 @endsection

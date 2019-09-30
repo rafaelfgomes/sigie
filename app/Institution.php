@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Institution extends Model
 {
 
-    protected $fillable = [ 'cnpj', 'status' ];
+    protected $fillable = [ 'name', 'cnpj', 'status' ];
 
     public function courses()
     {
 
-        return $this->hasMany('App\Course');
+        return $this->belongsToMany('App\Course');
     
     }
 

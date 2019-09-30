@@ -20,8 +20,6 @@ class CreateStudentsTable extends Migration
             $table->date('birth_date');
             $table->string('email', 50)->unique();
             $table->char('status', 1);
-            $table->integer('contact_id')->unsigned()->nullable();
-            $table->integer('address_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

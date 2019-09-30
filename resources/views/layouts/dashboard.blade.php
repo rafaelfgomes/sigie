@@ -20,16 +20,18 @@
 
             <div class="container">
 
-              <main class="py-4">
+                @include('partials._messages')
 
-                  @yield('content')
+                <main class="py-4">
+
+                    @yield('content')
   
-              </main>
+                </main>
 
             </div>
         
         </div>
     
-    </body>
+    </body>   
 
 </html>

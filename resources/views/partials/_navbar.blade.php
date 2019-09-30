@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
 
   <a class="navbar-brand" href="{{ route('dashboard')}}">
 
-    <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img src="{{ asset('images/sigielogo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
     SIGIE
   
   </a>
@@ -28,7 +28,33 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('students') }}">Estudantes</a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('associations') }}">Associar cursos</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('enrolments') }}">Matricular alunos</a>
+      </li>
       
+    </ul>
+
+    <ul class="nav navbar-nav ml-auto">
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ Auth::user()->name }}
+        </a>
+        
+        <div class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
+          <form class="text-right" action="{{ route('logout') }}" method="post">
+            <button type="submit" class="btn btn-link text-decoration-none" style="font-size: 15px; color: black;">Logout</button>
+          </form>
+        </div>
+      
+      </li>
+
     </ul>
 
   </div>
