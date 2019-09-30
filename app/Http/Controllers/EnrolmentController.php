@@ -12,11 +12,16 @@ class EnrolmentController extends Controller
     public function index()
     {
 
-        $instituions = Institution::where('status', 1)->get();
+        $institutions = Institution::where('status', 1)->get();
         $courses = Course::where('status', 1)->get();
         $students = Student::where('status', 1)->orderBy('name')->get();
 
-        return view('enrolments')->with([ 'institutions' => $instituions, 'courses' => $courses, 'students' => $students ]);
+        return view('enrolments')->with([ 'institutions' => $institutions, 'courses' => $courses, 'students' => $students ]);
 
+    }
+
+    public function enrolStudents(Request $request)
+    {
+        # to do...
     }
 }

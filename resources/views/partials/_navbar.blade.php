@@ -34,7 +34,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('enrolments') }}">Matrículas</a>
+        <a class="nav-link" href="{{ route('enrolments') }}">Matricular alunos</a>
       </li>
       
     </ul>

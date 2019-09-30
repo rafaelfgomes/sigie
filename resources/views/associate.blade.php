@@ -68,7 +68,7 @@
 
   <div class="row">
 
-    <div class="col d-none">
+    <div id="list-courses" class="col d-none">
 
       <label>Cursos escolhidos</label>
 
@@ -78,7 +78,7 @@
 
       <div class="text-center">
 
-        <button type="button" id="resgister-courses" class="btn btn-success">Cadastrar cursos</button>
+        <button type="button" id="register-courses" class="btn btn-success">Cadastrar cursos</button>
 
       </div>
 

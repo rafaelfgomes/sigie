@@ -725,11 +725,92 @@ $('body').on('click', '#enrol-student', () => {
 
     } else {
 
+
+
+    }    
+
+})
+
+$('#add-course').on('click', () => {
+
+    var selectedCourseId = $('#select-courses').children("option:selected").val()
+    var selectedCourseName = $('#select-courses').children("option:selected").html()
+    
+    var courses = $('#courses-list').children().each((i, v) => {
+        return v
+    })
+
+    if (selectedCourseId == 0) {
+
+        toastr.warning('É preciso escolher um curso')
         
+    } else {
+
+        $('#list-courses').removeClass('d-none')
+
+        if (courses.length == 0) {
+            
+            $('#courses-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedCourseId}" data-name="${selectedCourseName}">${selectedCourseName}<button type="button" id="course-remove" data-id="${selectedCourseId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
+    
+        } else {
+    
+            if (courses.length > 7) {
+    
+                toastr.warning('Limite máximo de cursos para esta instituição')
+                
+            } else {
+
+                $('#courses-list').append(`<li class="list-group-item d-flex justify-content-between align-items-center" value="${selectedCourseId}" data-name="${selectedCourseName}">${selectedCourseName}<button type="button" id="course-remove" data-id="${selectedCourseId}" class="btn btn-outline-danger"><i class="fas fa-times"></i></button></li>`)
+
+            }        
+    
+        }
+
+        $(`#select-courses option[value=${selectedCourseId}]`).attr('disabled', 'disabled')
+        $('#select-courses').prop('selectedIndex', 0)
+        
+    }
+
+})
+
+$('body').on('click', '#course-remove', () => {    
+
+    var id = $('#course-remove').data('id')
+
+    $(`#select-courses option[value=${id}]`).removeAttr('disabled')
+
+    $('#course-remove').parent().remove()
+
+    var students = $('#course-list').children().each((i, v) => {
+        return v
+    })
+
+    if (students.length == 0) {
+        
+        $('#list-courses').addClass('d-none')
 
     }
 
-    console.log(institution);
+})
+
+$('body').on('click', '#register-courses', () => {
+
+    var institution = $('#select-institutions').children("option:selected").val()
     
+    var courses = $('#courses-list').children().each((i, v) => {
+        return v        
+    })
+
+    if (institution == 0) {
+        
+        toastr.warning('É preciso escolher uma instituição!!')
+
+    } else {
+
+        var ids = courses.map((i, v) => {
+            return v['value']
+        })        
+
+    }    
 
 })
